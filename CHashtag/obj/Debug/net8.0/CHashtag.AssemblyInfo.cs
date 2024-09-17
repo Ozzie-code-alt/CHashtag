@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CHashtag")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+097a623481841fdcc921a71f63b54c252abcb7ce")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c99f2575afadbe20da436da6be0d0cc2ff25d97")]
 [assembly: System.Reflection.AssemblyProductAttribute("CHashtag")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CHashtag")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
