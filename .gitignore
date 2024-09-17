@@ -1,0 +1,40 @@
+# Ignore build outputs and temporary files
+bin
+obj
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings (optional)
+.vscode/
+
+# ASP.NET Core configuration and secrets
+appsettings.Development.json
+appsettings.Production.json
+
+# IDE and editor files
+.idea/
+.vscode/
+*.vs/
+*.vscode/
+*.DS_Store
+
+# Resharper files
+*.DotSettings.user
+
+# Rider files
+.idea/
+
+# Logs and reports
+*.log
+*.tlog
+
+# Runtime files
+*.pid
+*.pdb
+
+# Crash reports
+crashlog.txt
