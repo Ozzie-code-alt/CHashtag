@@ -39,5 +39,34 @@ app.MapPost(
     }
 );
 
+//Put Endpoint
+
+
+app.MapPut(
+    "games/{id}",
+    (int id, UpdateGameDto updateGame) =>
+    {
+        //find index first
+        //what happends if there is no game ? 
+        var index = games.FindIndex(game => game.Id == id);
+        games[index] = new GameDto(
+            id,
+            updateGame.Name,
+            updateGame.Genre,
+            updateGame.Price,
+            updateGame.ReleaseDate
+        );
+        return Results.NoContent();
+    }
+);
+
+
+
+//Delete Endpoint
+app.MapDelete("games/{id}", ()=>{
+
+});
+
+
 // DTO - Data transfer Object carries data between operations
 app.Run();
