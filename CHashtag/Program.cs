@@ -19,13 +19,21 @@ List<GameDto> games =
 app.MapGet("games", () => games);
 
 //get games by id
-app.MapGet("games/{id}", (int id) => games.Find(game => game.Id == id))
+app.MapGet(
+        "games/{id}",
+        (int id) =>
+        {
+            GameDto? game = games.Find(game => game.Id == id);
+
+            //Look into this - more of like an appropriate handling of no Games or invalid params id
+            return game is null ? Results.NotFound() : Results.Ok(game);
+        }
+    )
     .WithName(getGameEndpointName);
 
 app.MapGet("/", () => "Hello World!");
 
 // POST Request  / games
-
 app.MapPost(
     "games",
     (CreateGameDto newGame) =>
@@ -40,8 +48,6 @@ app.MapPost(
 );
 
 //Put Endpoint
-
-
 app.MapPut(
     "games/{id}",
     (int id, UpdateGameDto updateGame) =>
@@ -49,6 +55,12 @@ app.MapPut(
         //find index first
         //what happends if there is no game ?
         var index = games.FindIndex(game => game.Id == id);
+
+        if (index == -1) // Out of bounds
+        {
+            return Results.NotFound();
+        }
+
         games[index] = new GameDto(
             id,
             updateGame.Name,
