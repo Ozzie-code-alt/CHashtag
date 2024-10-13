@@ -24,6 +24,70 @@ appsettings.Production.json
 
 # Resharper files
 *.DotSettings.user
+# Visual Studio files
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+.vs/
+.idea/
+
+# .NET generated files
+*.exe
+*.dll
+*.pdb
+*.cache
+*.builds
+*.config
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+*.testsettings
+*.vspscc
+project.lock.json
+project.fragment.lock.json
+
+# Backup and temporary files
+*_backup*
+~$*
+*.bak
+*.tmp
+*.temp
+*.old
+
+# Compiled source code
+bin/
+obj/
+out/
+[Bb]uild/
+[Bb]in/
+
+# ASP.NET specific
+appsettings.Development.json
+appsettings.*.json
+App_Data/
+node_modules/
+wwwroot/
+wwwroot/lib/
+*.log
+logs/
+
+# NuGet Packages
+*.nupkg
+packages/
+.nuget/
+
+# User-specific files
+*.swp
+*.ide/
+*.code-workspace
+*.DS_Store
+*.Rider/
+.idea/
 
 # Rider files
 .idea/
