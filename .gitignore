@@ -1,5 +1,5 @@
 # Ignore build outputs and temporary files
-bin
+
 obj
 
 # User-specific files
@@ -60,7 +60,6 @@ project.fragment.lock.json
 *.old
 
 # Compiled source code
-bin/
 obj/
 out/
 [Bb]uild/
@@ -75,7 +74,7 @@ wwwroot/
 wwwroot/lib/
 *.log
 logs/
-
+bin/
 # NuGet Packages
 *.nupkg
 packages/
