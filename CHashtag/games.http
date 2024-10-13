@@ -1,1 +1,22 @@
 GET http://localhost:5110ls
+
+
+###
+POST http://localhost:5110/games
+Content-Type: application/json
+
+{
+  "genre": "Kids and Hami",
+  "price": 192.9,
+  "releaseDate": "1992-02-12"
+}
+
+###
+PUT http://localhost:5110/games/1
+Content-Type: application/json
+
+{
+  "genre": "Kids and Hami",
+  "price": 192.9,
+  "releaseDate": "1992-02-12"
+}
