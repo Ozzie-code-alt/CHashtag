@@ -1,4 +1,5 @@
 using CHashtag.DTOs;
+using MiniValidation;
 
 namespace CHashtag.Endpoints;
 
@@ -36,49 +37,64 @@ public static class GamesEndpoints
         app.MapGet("/", () => "Hello World!");
 
         // POST Request  / games
-        group.MapPost(
-            "/",
-            (CreateGameDto newGame) =>
-            {
-                GameDto game =
-                    new(
-                        games.Count + 1,
-                        newGame.Name,
-                        newGame.Genre,
-                        newGame.Price,
-                        newGame.ReleaseDate
-                    );
+        group
+            .MapPost(
+                "/",
+                (CreateGameDto newGame) =>
+                {
+                    /*
+                    Singular approachd
+                    if(string.IsNullOrEmpty(newGame.Name)){
+                        return Results.BadRequest("Name Is Required");
+                    }
+                    */
+                    // we can handle validations in C# by using annotations
+                    if (!MiniValidator.TryValidate(newGame, out var errors))
+                    {
+                        return Results.ValidationProblem(errors);
+                    }
+                    GameDto game =
+                        new(
+                            games.Count + 1,
+                            newGame.Name,
+                            newGame.Genre,
+                            newGame.Price,
+                            newGame.ReleaseDate
+                        );
 
-                games.Add(game);
+                    games.Add(game);
 
-                return Results.CreatedAtRoute(getGameEndpointName, new { id = game.Id }, game);
-            }
-        );
+                    return Results.CreatedAtRoute(getGameEndpointName, new { id = game.Id }, game);
+                }
+            )
+            .WithParameterValidation();
 
         //Put Endpoint
-        group.MapPut(
-            "/{id}",
-            (int id, UpdateGameDto updateGame) =>
-            {
-                //find index first
-                //what happends if there is no game ?
-                var index = games.FindIndex(game => game.Id == id);
-
-                if (index == -1) // Out of bounds
+        group
+            .MapPut(
+                "/{id}",
+                (int id, UpdateGameDto updateGame) =>
                 {
-                    return Results.NotFound();
-                }
+                    //find index first
+                    //what happends if there is no game ?
+                    var index = games.FindIndex(game => game.Id == id);
 
-                games[index] = new GameDto(
-                    id,
-                    updateGame.Name,
-                    updateGame.Genre,
-                    updateGame.Price,
-                    updateGame.ReleaseDate
-                );
-                return Results.NoContent();
-            }
-        );
+                    if (index == -1) // Out of bounds
+                    {
+                        return Results.NotFound();
+                    }
+
+                    games[index] = new GameDto(
+                        id,
+                        updateGame.Name,
+                        updateGame.Genre,
+                        updateGame.Price,
+                        updateGame.ReleaseDate
+                    );
+                    return Results.NoContent();
+                }
+            )
+            .WithParameterValidation();
 
         //Delete Endpoint
         group.MapDelete(
